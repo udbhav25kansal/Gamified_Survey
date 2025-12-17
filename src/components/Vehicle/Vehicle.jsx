@@ -77,13 +77,13 @@ const Vehicle = ({ position = [0, 1, 0] }) => {
         const { forward, backward, left, right, brake, reset } = controls.current;
 
         // === TUNING PARAMETERS ===
-        const maxSpeed = 50;          // Increased from 25
-        const maxReverse = 30;        // Increased from 15
-        const acceleration = 80;      // Increased for faster response
-        const braking = 100;          // Increased for better stopping
+        const maxSpeed = 35;          // Comfortable cruising speed
+        const maxReverse = 20;        // Good reverse speed
+        const acceleration = 60;      // Responsive but controlled
+        const braking = 100;          // Strong braking maintained
         const friction = 20;          // Natural slowdown
-        const maxSteerAngle = 0.6;    // Slightly reduced for stability
-        const steerSpeed = 8;         // Faster steering response
+        const maxSteerAngle = 0.6;    // Good stability
+        const steerSpeed = 8;         // Responsive steering
         const turnRate = 2.5;         // Base turn rate
         
         // === ACCELERATION ===
