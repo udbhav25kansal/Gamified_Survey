@@ -88,6 +88,23 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
                     />
                 </mesh>
 
+                {/* Bold heading above portal */}
+                <Text
+                    position={[0, 3.5, 0]}
+                    fontSize={0.8}
+                    color="#ffffff"
+                    anchorX="center"
+                    anchorY="middle"
+                    maxWidth={6}
+                    textAlign="center"
+                    outlineWidth={0.08}
+                    outlineColor="#000000"
+                    letterSpacing={0.05}
+                    fontWeight="bold"
+                >
+                    {label}
+                </Text>
+
                 {/* Icon floating in front */}
                 <Float
                     speed={2}
@@ -107,18 +124,19 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
                     </Text>
                 </Float>
 
-                {/* Portal label - optimized single layer */}
+                {/* Portal label below - smaller secondary label */}
                 <Text
                     position={[0, -3, 0]}
-                    fontSize={0.6}
+                    fontSize={0.4}
                     color="#ffffff"
                     anchorX="center"
                     anchorY="middle"
                     maxWidth={6}
                     textAlign="center"
-                    outlineWidth={0.05}
+                    outlineWidth={0.03}
                     outlineColor={color}
                     letterSpacing={0.02}
+                    fillOpacity={0.7}
                 >
                     {label}
                 </Text>
