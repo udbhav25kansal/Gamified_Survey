@@ -107,46 +107,25 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
                     </Text>
                 </Float>
 
-                {/* Ultra-high quality label below */}
-                <group position={[0, -3, 0]}>
-                    {/* Main label text */}
-                    <Text
-                        position={[0, 0, 0]}
-                        fontSize={0.6}
-                        color="#ffffff"
-                        anchorX="center"
-                        anchorY="middle"
-                        maxWidth={6}
-                        textAlign="center"
-                        outlineWidth={0.05}
-                        outlineColor={color}
-                        letterSpacing={0.02}
-                    >
-                        {label}
-                    </Text>
+                {/* Portal label - optimized single layer */}
+                <Text
+                    position={[0, -3, 0]}
+                    fontSize={0.6}
+                    color="#ffffff"
+                    anchorX="center"
+                    anchorY="middle"
+                    maxWidth={6}
+                    textAlign="center"
+                    outlineWidth={0.05}
+                    outlineColor={color}
+                    letterSpacing={0.02}
+                >
+                    {label}
+                </Text>
 
-                    {/* Background glow effect */}
-                    <Text
-                        position={[0, 0, -0.1]}
-                        fontSize={0.65}
-                        color={color}
-                        anchorX="center"
-                        anchorY="middle"
-                        maxWidth={6}
-                        textAlign="center"
-                        outlineWidth={0.15}
-                        outlineColor={color}
-                        fillOpacity={0}
-                        outlineOpacity={hovered ? 0.6 : 0.3}
-                        letterSpacing={0.02}
-                    >
-                        {label}
-                    </Text>
-                </group>
-
-                {/* Sparkles for premium feel */}
+                {/* Sparkles for premium feel - optimized count */}
                 <Sparkles
-                    count={30}
+                    count={8}
                     scale={4}
                     size={3}
                     speed={0.4}
@@ -154,15 +133,13 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
                     color={color}
                 />
 
-                {/* Spotlight from above */}
+                {/* Optimized spotlight - no shadows for performance */}
                 <spotLight
                     position={[0, 5, 0]}
                     angle={0.6}
                     penumbra={0.5}
-                    intensity={hovered ? 80 : 40}
+                    intensity={hovered ? 50 : 25}
                     color={color}
-                    castShadow
-                    shadow-mapSize={[1024, 1024]}
                 />
 
                 {/* Theme-specific decorations */}
@@ -266,9 +243,9 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
 const DecorativeBlocks = () => {
     const blockPositions = useMemo(() => {
         const positions = [];
-        // Create impressive block structures around the zone
-        for (let i = 0; i < 20; i++) {
-            const angle = (i / 20) * Math.PI * 2;
+        // Create impressive block structures around the zone - optimized count
+        for (let i = 0; i < 8; i++) {
+            const angle = (i / 8) * Math.PI * 2;
             const radius = 25 + Math.random() * 10;
             const x = Math.cos(angle) * radius;
             const z = Math.sin(angle) * radius;
@@ -418,14 +395,14 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             {/* Impressive decorative environment blocks */}
             <DecorativeBlocks />
 
-            {/* Ultra-high quality reflective floor */}
+            {/* Optimized reflective floor */}
             <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.8, -50]} receiveShadow>
                 <planeGeometry args={[80, 40]} />
                 <MeshReflectorMaterial
                     blur={[300, 100]}
-                    resolution={1024}
+                    resolution={512}
                     mixBlur={1}
-                    mixStrength={40}
+                    mixStrength={20}
                     roughness={1}
                     depthScale={1.2}
                     minDepthThreshold={0.4}
@@ -438,12 +415,12 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             {/* Atmospheric lighting */}
             <ambientLight intensity={0.2} />
 
-            {/* Key light */}
+            {/* Key light - optimized shadows */}
             <directionalLight
                 position={[20, 30, 20]}
                 intensity={1.5}
                 castShadow
-                shadow-mapSize={[2048, 2048]}
+                shadow-mapSize={[1024, 1024]}
                 shadow-camera-far={100}
                 shadow-camera-left={-30}
                 shadow-camera-right={30}
@@ -458,9 +435,9 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             {/* Volumetric fog */}
             <fog attach="fog" args={['#0a0a0a', 20, 80]} />
 
-            {/* Atmospheric particles */}
+            {/* Atmospheric particles - optimized */}
             <Sparkles
-                count={100}
+                count={30}
                 scale={50}
                 size={2}
                 speed={0.2}
