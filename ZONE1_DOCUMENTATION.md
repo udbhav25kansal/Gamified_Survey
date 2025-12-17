@@ -38,17 +38,17 @@ Zone 1 is the **Source Tracking** zone where users answer "How'd you find us?" b
 
 ### ⚙️ Advanced Physics
 
-1. **Rapier Physics Integration:**
-   - RigidBody sensor triggers for collision detection
-   - Fixed physics bodies for all decorative blocks
+1. **Cannon Physics Integration:**
+   - useCylinder hook for trigger zones around each portal
+   - isTrigger: true for sensor-based collision detection
    - Cylindrical trigger zones around each portal
-   - Intersection detection for hover effects
+   - Chassis name check for vehicle detection
 
 2. **Interaction System:**
-   - `onIntersectionEnter` - Triggers hover state
-   - `onIntersectionExit` - Clears hover state
-   - `onCollisionEnter` - Triggers portal selection
+   - `onCollide` - Triggers when vehicle enters portal zone
+   - Chassis check (`e.body.name === 'chassis'`) ensures only vehicle triggers
    - State management prevents duplicate selections
+   - Simplified approach for decorative blocks (visual only, no physics)
 
 ### 🏗️ Impressive Environmental Blocks
 
@@ -196,7 +196,7 @@ import {
     Sparkles, Ring, Sphere, Box,
     RoundedBox
 } from '@react-three/drei';
-import { RigidBody } from '@react-three/rapier';
+import { useCylinder, useBox as useCannonBox } from '@react-three/cannon';
 import * as THREE from 'three';
 ```
 
@@ -278,7 +278,7 @@ const handleZone1Complete = (selectedPortal) => {
 
 **Inspiration:** Bruno Simon's Portfolio (bruno-simon.com)
 **Design Approach:** Ultra-high quality, AAA game aesthetic
-**Physics Engine:** Rapier (via @react-three/rapier)
+**Physics Engine:** Cannon.js (via @react-three/cannon)
 **3D Library:** Three.js (via @react-three/fiber)
 **Helper Components:** drei (@react-three/drei)
 
