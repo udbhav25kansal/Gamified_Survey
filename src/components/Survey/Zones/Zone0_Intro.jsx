@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCarControl } from '../../../contexts/CarControlContext';
 import ToppleCharacter from '../Interactions/ToppleCharacter';
 import VideoScreen from '../Interactions/VideoScreen';
 import PlayButton from '../Interactions/PlayButton';
@@ -7,18 +8,19 @@ import StartGate from '../Interactions/StartGate';
 const Zone0_Intro = ({ onComplete, videoUrl = null }) => {
     const [videoPlaying, setVideoPlaying] = useState(false);
     const [videoFinished, setVideoFinished] = useState(false);
+    const { freezeCar, unfreezeCar } = useCarControl();
 
     const handlePlayPress = () => {
         console.log('Play button pressed! Starting video...');
         setVideoPlaying(true);
-        // TODO: Freeze car physics here
+        freezeCar(); // Freeze car physics during video
     };
 
     const handleVideoEnd = () => {
         console.log('Video ended!');
         setVideoPlaying(false);
         setVideoFinished(true);
-        // TODO: Re-enable car physics here
+        unfreezeCar(); // Re-enable car physics after video
     };
 
     const handleGateEnter = () => {

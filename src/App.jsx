@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
 import { Stars } from '@react-three/drei';
 import { BrandProvider } from './context/BrandContext';
+import { CarControlProvider } from './contexts/CarControlContext';
 import World from './components/World/World';
 import UI from './components/UI/UI';
 import DecaBotIntro from './components/UI/DecaBotIntro';
@@ -60,20 +61,22 @@ function App() {
                     <pointLight position={[-20, 5, -20]} intensity={0.3} color="#00D4FF" />
 
                     <Suspense fallback={null}>
-                        <Physics gravity={[0, -9.81, 0]}>
-                            <World />
-                        </Physics>
+                        <CarControlProvider>
+                            <Physics gravity={[0, -9.81, 0]}>
+                                <World />
+                            </Physics>
 
-                        {/* Cyberpunk Stars */}
-                        <Stars
-                            radius={100}
-                            depth={50}
-                            count={5000}
-                            factor={4}
-                            saturation={0}
-                            fade
-                            speed={1}
-                        />
+                            {/* Cyberpunk Stars */}
+                            <Stars
+                                radius={100}
+                                depth={50}
+                                count={5000}
+                                factor={4}
+                                saturation={0}
+                                fade
+                                speed={1}
+                            />
+                        </CarControlProvider>
                     </Suspense>
                 </Canvas>
                 <UI />

@@ -2,19 +2,20 @@ import React from 'react';
 import { usePlane } from '@react-three/cannon';
 import Vehicle from '../Vehicle/Vehicle';
 import ZoneManager from '../Survey/ZoneManager';
+import BoundaryWalls from './BoundaryWalls';
 
 const Floor = () => {
     const [ref] = usePlane(() => ({
         rotation: [-Math.PI / 2, 0, 0],
         position: [0, 0, 0],
-        material: { friction: 0.01, restitution: 0.1 }
+        material: { friction: 0.3, restitution: 0 }
     }));
 
     return (
         <group>
             {/* Main floor - extends far in all directions */}
             <mesh ref={ref} receiveShadow>
-                <planeGeometry args={[1000, 1000]} />
+                <planeGeometry args={[1000, 2000]} />
                 <meshStandardMaterial
                     color="#111111"
                     roughness={0.8}
@@ -22,9 +23,9 @@ const Floor = () => {
                 />
             </mesh>
 
-            {/* Glowing grid overlay - centered further back to cover survey zones */}
-            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, -200]}>
-                <planeGeometry args={[500, 600]} />
+            {/* Glowing grid overlay - centered further back to cover all survey zones */}
+            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, -450]}>
+                <planeGeometry args={[500, 1000]} />
                 <meshBasicMaterial
                     color="#E6007E"
                     wireframe
@@ -33,10 +34,10 @@ const Floor = () => {
                 />
             </mesh>
 
-            {/* Grid helper - large and centered to cover survey areas */}
+            {/* Grid helper - large and centered to cover all survey areas */}
             <gridHelper
-                args={[500, 250, '#E6007E', '#333333']}
-                position={[0, 0.02, -100]}
+                args={[800, 400, '#E6007E', '#333333']}
+                position={[0, 0.02, -400]}
             />
         </group>
     );
@@ -108,6 +109,7 @@ const World = () => {
         <>
             <Floor />
             <DecorativeElements />
+            <BoundaryWalls />
             <Vehicle position={[0, 1, 0]} />
             <ZoneManager />
         </>

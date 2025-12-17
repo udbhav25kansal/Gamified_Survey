@@ -143,20 +143,11 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
 
                 {/* Sparkles for premium feel - optimized count */}
                 <Sparkles
-                    count={8}
+                    count={3}
                     scale={4}
                     size={3}
                     speed={0.4}
                     opacity={hovered ? 1 : 0.6}
-                    color={color}
-                />
-
-                {/* Optimized spotlight - no shadows for performance */}
-                <spotLight
-                    position={[0, 5, 0]}
-                    angle={0.6}
-                    penumbra={0.5}
-                    intensity={hovered ? 50 : 25}
                     color={color}
                 />
 
@@ -208,7 +199,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '📱',
             label: 'Social Media',
             color: '#1DA1F2',
-            position: [-16, 2, -50],
+            position: [-16, 2, -75],
             theme: 'social'
         },
         {
@@ -216,7 +207,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '📦',
             label: 'QR Code',
             color: '#8B4513',
-            position: [-8, 2, -50],
+            position: [-8, 2, -75],
             theme: 'qrcode'
         },
         {
@@ -224,7 +215,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '🎪',
             label: 'Convention',
             color: '#FF6B6B',
-            position: [0, 2, -50],
+            position: [0, 2, -75],
             theme: 'convention'
         },
         {
@@ -232,7 +223,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '🔗',
             label: 'Friend Link',
             color: '#FFD700',
-            position: [8, 2, -50],
+            position: [8, 2, -75],
             theme: 'friend'
         },
         {
@@ -240,7 +231,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '🤷',
             label: "Can't Remember",
             color: '#9B59B6',
-            position: [16, 2, -50],
+            position: [16, 2, -75],
             theme: 'unknown'
         }
     ];
@@ -261,7 +252,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             {/* Zone title - Ultra-high quality styling */}
             <Float speed={1} rotationIntensity={0.2} floatIntensity={0.3}>
                 <Text
-                    position={[0, 10, -45]}
+                    position={[0, 10, -70]}
                     fontSize={1.5}
                     color="#ffffff"
                     anchorX="center"
@@ -278,7 +269,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
 
             {/* Subtitle instruction text */}
             <Text
-                position={[0, 8, -45]}
+                position={[0, 8, -70]}
                 fontSize={0.6}
                 color="#00D4FF"
                 anchorX="center"
@@ -306,20 +297,13 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             ))}
 
 
-            {/* Optimized reflective floor */}
-            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.8, -50]} receiveShadow>
+            {/* Optimized floor - simple material for performance */}
+            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.8, -75]} receiveShadow>
                 <planeGeometry args={[80, 40]} />
-                <MeshReflectorMaterial
-                    blur={[300, 100]}
-                    resolution={512}
-                    mixBlur={1}
-                    mixStrength={20}
-                    roughness={1}
-                    depthScale={1.2}
-                    minDepthThreshold={0.4}
-                    maxDepthThreshold={1.4}
-                    color="#101010"
-                    metalness={0.8}
+                <meshStandardMaterial
+                    color="#151515"
+                    metalness={0.9}
+                    roughness={0.1}
                 />
             </mesh>
 
@@ -331,7 +315,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
                 position={[20, 30, 20]}
                 intensity={1.5}
                 castShadow
-                shadow-mapSize={[1024, 1024]}
+                shadow-mapSize={[512, 512]}
                 shadow-camera-far={100}
                 shadow-camera-left={-30}
                 shadow-camera-right={30}
@@ -340,15 +324,15 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             />
 
             {/* Rim lights for depth */}
-            <pointLight position={[-20, 5, -50]} intensity={50} color="#00D4FF" />
-            <pointLight position={[20, 5, -50]} intensity={50} color="#E6007E" />
+            <pointLight position={[-20, 5, -75]} intensity={50} color="#00D4FF" />
+            <pointLight position={[20, 5, -75]} intensity={50} color="#E6007E" />
 
             {/* Volumetric fog */}
             <fog attach="fog" args={['#0a0a0a', 20, 80]} />
 
             {/* Atmospheric particles - optimized */}
             <Sparkles
-                count={30}
+                count={10}
                 scale={50}
                 size={2}
                 speed={0.2}

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useBox } from '@react-three/cannon';
 import { useControls } from '../../hooks/useControls';
+import { useCarControl } from '../../contexts/CarControlContext';
 import * as THREE from 'three';
 
 const CameraRig = ({ target }) => {
@@ -39,11 +40,12 @@ const CameraRig = ({ target }) => {
 
 const Vehicle = ({ position = [0, 1, 0] }) => {
     const controls = useControls();
+    const { carFrozen, unfreezeCar } = useCarControl();
 
     // Smooth steering angle (not instant)
     const steeringAngle = useRef(0);
     const targetSteering = useRef(0);
-    
+
     // Current car state
     const carRotation = useRef(0);
     const carSpeed = useRef(0);
@@ -59,8 +61,12 @@ const Vehicle = ({ position = [0, 1, 0] }) => {
         args: [chassisWidth, chassisHeight, chassisLength],
         name: 'chassis',
         allowSleep: false,
-        linearDamping: 0.3,
-        angularDamping: 0.5,
+        linearDamping: 0.1,
+        angularDamping: 0.3,
+        material: {
+            friction: 0.3,
+            restitution: 0,
+        }
     }));
 
     // Track Y velocity for gravity
@@ -76,15 +82,31 @@ const Vehicle = ({ position = [0, 1, 0] }) => {
 
         const { forward, backward, left, right, brake, reset } = controls.current;
 
+        // If car is frozen, check if user pressed any control to unfreeze
+        if (carFrozen) {
+            // If any control is pressed, unfreeze the car
+            if (forward || backward || left || right || brake) {
+                console.log('Control pressed - unfreezing car...');
+                unfreezeCar();
+                // Don't return, continue to process the controls
+            } else {
+                // Keep car frozen
+                chassisApi.velocity.set(0, 0, 0);
+                chassisApi.angularVelocity.set(0, 0, 0);
+                carSpeed.current = 0;
+                return;
+            }
+        }
+
         // === TUNING PARAMETERS ===
-        const maxSpeed = 25;          // Slower for better control
-        const maxReverse = 15;        // Slower reverse
-        const acceleration = 45;      // More gradual acceleration
+        const maxSpeed = 35;          // Faster for smoother feel
+        const maxReverse = 20;        // Faster reverse
+        const acceleration = 60;      // Quicker acceleration
         const braking = 100;          // Strong braking maintained
-        const friction = 20;          // Natural slowdown
+        const friction = 15;          // Less friction for smoother glide
         const maxSteerAngle = 0.6;    // Good stability
-        const steerSpeed = 8;         // Responsive steering
-        const turnRate = 2.5;         // Base turn rate
+        const steerSpeed = 10;        // More responsive steering
+        const turnRate = 3.0;         // Faster turn rate
         
         // === ACCELERATION ===
         if (forward) {
