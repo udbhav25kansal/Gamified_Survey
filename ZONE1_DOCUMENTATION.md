@@ -10,6 +10,8 @@
 
 Zone 1 is the **Source Tracking** zone where users answer "How'd you find us?" by driving through one of 5 themed portals. This zone features ultra-high quality graphics, advanced physics, impressive environmental blocks, and stunning visual effects inspired by Bruno Simon's portfolio.
 
+**Updated:** December 17, 2025 - Enhanced visibility and premium text styling with color-matched glows and improved spatial layout.
+
 ---
 
 ## Features Implemented
@@ -34,7 +36,15 @@ Zone 1 is the **Source Tracking** zone where users answer "How'd you find us?" b
    - Volumetric fog for depth perception
    - Animated glow pulsing on portal rings
    - Smooth scale transitions on hover (lerp interpolation)
-   - Floating text with outlines
+   - Floating text with color-matched outlines and glow effects
+
+4. **Ultra-High Quality Text Styling:**
+   - Large zone title (1.5 fontSize) with pink outline (#E6007E)
+   - Cyan instruction subtitle (0.6 fontSize) for user guidance
+   - Enhanced portal labels (0.6 fontSize) with 0.02 letter spacing
+   - Dual-layer text rendering: solid text + glow outline
+   - Dynamic glow intensity on hover (0.3 to 0.6 opacity)
+   - Color-matched outlines per portal theme
 
 ### ⚙️ Advanced Physics
 
@@ -67,7 +77,13 @@ Zone 1 is the **Source Tracking** zone where users answer "How'd you find us?" b
 
 ### 🎭 Themed Portal Designs
 
-Each of the 5 portals has unique theming:
+Each of the 5 portals has unique theming and optimal spacing for visibility:
+
+**Spatial Layout:**
+- Portals positioned at z=-50 (10 units behind Zone 0's gate)
+- 8-unit horizontal spacing between portals
+- Elevated at y=2 for dramatic presentation
+- Floor dimensions: 80x40 units for expansive feel
 
 1. **📱 Social Media Portal**
    - Color: `#1DA1F2` (Twitter blue)
