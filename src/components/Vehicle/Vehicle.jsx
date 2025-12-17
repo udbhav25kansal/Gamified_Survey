@@ -77,9 +77,9 @@ const Vehicle = ({ position = [0, 1, 0] }) => {
         const { forward, backward, left, right, brake, reset } = controls.current;
 
         // === TUNING PARAMETERS ===
-        const maxSpeed = 35;          // Comfortable cruising speed
-        const maxReverse = 20;        // Good reverse speed
-        const acceleration = 60;      // Responsive but controlled
+        const maxSpeed = 25;          // Slower for better control
+        const maxReverse = 15;        // Slower reverse
+        const acceleration = 45;      // More gradual acceleration
         const braking = 100;          // Strong braking maintained
         const friction = 20;          // Natural slowdown
         const maxSteerAngle = 0.6;    // Good stability
