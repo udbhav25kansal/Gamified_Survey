@@ -116,7 +116,6 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
                     anchorY="middle"
                     maxWidth={4}
                     textAlign="center"
-                    font="/fonts/Inter-Bold.woff"
                     outlineWidth={0.02}
                     outlineColor={color}
                 >
@@ -357,7 +356,6 @@ const Zone1_SourceTracking = ({ onComplete }) => {
                     anchorY="middle"
                     maxWidth={20}
                     textAlign="center"
-                    font="/fonts/Inter-Bold.woff"
                     outlineWidth={0.05}
                     outlineColor="#000000"
                 >
