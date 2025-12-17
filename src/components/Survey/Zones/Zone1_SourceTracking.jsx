@@ -107,20 +107,42 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
                     </Text>
                 </Float>
 
-                {/* Label below */}
-                <Text
-                    position={[0, -3, 0]}
-                    fontSize={0.4}
-                    color="#ffffff"
-                    anchorX="center"
-                    anchorY="middle"
-                    maxWidth={4}
-                    textAlign="center"
-                    outlineWidth={0.02}
-                    outlineColor={color}
-                >
-                    {label}
-                </Text>
+                {/* Ultra-high quality label below */}
+                <group position={[0, -3, 0]}>
+                    {/* Main label text */}
+                    <Text
+                        position={[0, 0, 0]}
+                        fontSize={0.6}
+                        color="#ffffff"
+                        anchorX="center"
+                        anchorY="middle"
+                        maxWidth={6}
+                        textAlign="center"
+                        outlineWidth={0.05}
+                        outlineColor={color}
+                        letterSpacing={0.02}
+                    >
+                        {label}
+                    </Text>
+
+                    {/* Background glow effect */}
+                    <Text
+                        position={[0, 0, -0.1]}
+                        fontSize={0.65}
+                        color={color}
+                        anchorX="center"
+                        anchorY="middle"
+                        maxWidth={6}
+                        textAlign="center"
+                        outlineWidth={0.15}
+                        outlineColor={color}
+                        fillOpacity={0}
+                        outlineOpacity={hovered ? 0.6 : 0.3}
+                        letterSpacing={0.02}
+                    >
+                        {label}
+                    </Text>
+                </group>
 
                 {/* Sparkles for premium feel */}
                 <Sparkles
@@ -296,7 +318,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '📱',
             label: 'Social Media',
             color: '#1DA1F2',
-            position: [-12, 2, -40],
+            position: [-16, 2, -50],
             theme: 'social'
         },
         {
@@ -304,7 +326,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '📦',
             label: 'QR Code',
             color: '#8B4513',
-            position: [-6, 2, -40],
+            position: [-8, 2, -50],
             theme: 'qrcode'
         },
         {
@@ -312,7 +334,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '🎪',
             label: 'Convention',
             color: '#FF6B6B',
-            position: [0, 2, -40],
+            position: [0, 2, -50],
             theme: 'convention'
         },
         {
@@ -320,7 +342,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '🔗',
             label: 'Friend Link',
             color: '#FFD700',
-            position: [6, 2, -40],
+            position: [8, 2, -50],
             theme: 'friend'
         },
         {
@@ -328,7 +350,7 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             icon: '🤷',
             label: "Can't Remember",
             color: '#9B59B6',
-            position: [12, 2, -40],
+            position: [16, 2, -50],
             theme: 'unknown'
         }
     ];
@@ -346,22 +368,38 @@ const Zone1_SourceTracking = ({ onComplete }) => {
 
     return (
         <group name="zone-1-source-tracking">
-            {/* Zone title */}
+            {/* Zone title - Ultra-high quality styling */}
             <Float speed={1} rotationIntensity={0.2} floatIntensity={0.3}>
                 <Text
-                    position={[0, 8, -35]}
-                    fontSize={1.2}
+                    position={[0, 10, -45]}
+                    fontSize={1.5}
                     color="#ffffff"
                     anchorX="center"
                     anchorY="middle"
                     maxWidth={20}
                     textAlign="center"
-                    outlineWidth={0.05}
-                    outlineColor="#000000"
+                    outlineWidth={0.08}
+                    outlineColor="#E6007E"
+                    letterSpacing={0.05}
                 >
                     HOW'D YOU FIND US?
                 </Text>
             </Float>
+
+            {/* Subtitle instruction text */}
+            <Text
+                position={[0, 8, -45]}
+                fontSize={0.6}
+                color="#00D4FF"
+                anchorX="center"
+                anchorY="middle"
+                maxWidth={30}
+                textAlign="center"
+                outlineWidth={0.03}
+                outlineColor="#000000"
+            >
+                Drive through a portal to make your selection
+            </Text>
 
             {/* All 5 portals */}
             {portals.map((portal) => (
@@ -381,8 +419,8 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             <DecorativeBlocks />
 
             {/* Ultra-high quality reflective floor */}
-            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.8, -40]} receiveShadow>
-                <planeGeometry args={[60, 30]} />
+            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.8, -50]} receiveShadow>
+                <planeGeometry args={[80, 40]} />
                 <MeshReflectorMaterial
                     blur={[300, 100]}
                     resolution={1024}
@@ -414,8 +452,8 @@ const Zone1_SourceTracking = ({ onComplete }) => {
             />
 
             {/* Rim lights for depth */}
-            <pointLight position={[-20, 5, -40]} intensity={50} color="#00D4FF" />
-            <pointLight position={[20, 5, -40]} intensity={50} color="#E6007E" />
+            <pointLight position={[-20, 5, -50]} intensity={50} color="#00D4FF" />
+            <pointLight position={[20, 5, -50]} intensity={50} color="#E6007E" />
 
             {/* Volumetric fog */}
             <fog attach="fog" args={['#0a0a0a', 20, 80]} />
