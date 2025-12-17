@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Text, Float, MeshReflectorMaterial, Sparkles, Ring, Sphere, Box, RoundedBox, useTexture } from '@react-three/drei';
-import { RigidBody } from '@react-three/rapier';
+import { Text, Float, MeshReflectorMaterial, Sparkles, Ring, Sphere, Box, RoundedBox } from '@react-three/drei';
+import { useCylinder, useBox as useCannonBox } from '@react-three/cannon';
 import * as THREE from 'three';
 
 // Ultra-high quality Portal component with advanced materials and physics
@@ -9,6 +9,19 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
     const portalRef = useRef();
     const glowRef = useRef();
     const [hovered, setHovered] = useState(false);
+
+    // Physics trigger zone using Cannon
+    const [triggerRef] = useCylinder(() => ({
+        isTrigger: true,
+        position,
+        args: [2.5, 2.5, 4, 16],
+        onCollide: (e) => {
+            if (e.body.name === 'chassis' && !selected) {
+                setHovered(true);
+                onSelect();
+            }
+        }
+    }));
 
     // Animate portal rotation and glow
     useFrame((state) => {
@@ -194,26 +207,6 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
                 )}
             </group>
 
-            {/* Physics trigger zone - invisible */}
-            <RigidBody
-                type="fixed"
-                sensor
-                onIntersectionEnter={() => {
-                    setHovered(true);
-                }}
-                onIntersectionExit={() => {
-                    setHovered(false);
-                }}
-                onCollisionEnter={() => {
-                    if (!selected) {
-                        onSelect();
-                    }
-                }}
-            >
-                <mesh visible={false}>
-                    <cylinderGeometry args={[2.5, 2.5, 4, 16]} />
-                </mesh>
-            </RigidBody>
 
             {/* Base platform */}
             <mesh position={[0, -0.5, 0]} receiveShadow>
@@ -272,23 +265,22 @@ const DecorativeBlocks = () => {
     return (
         <group>
             {blockPositions.map((block, i) => (
-                <RigidBody key={i} type="fixed" colliders="cuboid">
-                    <RoundedBox
-                        position={block.position}
-                        args={block.scale}
-                        radius={0.2}
-                        castShadow
-                        receiveShadow
-                    >
-                        <meshStandardMaterial
-                            color={block.color}
-                            metalness={0.6}
-                            roughness={0.3}
-                            emissive={block.color}
-                            emissiveIntensity={0.2}
-                        />
-                    </RoundedBox>
-                </RigidBody>
+                <RoundedBox
+                    key={i}
+                    position={block.position}
+                    args={block.scale}
+                    radius={0.2}
+                    castShadow
+                    receiveShadow
+                >
+                    <meshStandardMaterial
+                        color={block.color}
+                        metalness={0.6}
+                        roughness={0.3}
+                        emissive={block.color}
+                        emissiveIntensity={0.2}
+                    />
+                </RoundedBox>
             ))}
         </group>
     );
