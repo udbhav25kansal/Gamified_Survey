@@ -1,6 +1,6 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Text, Float, MeshReflectorMaterial, Sparkles, Ring, Sphere, Box, RoundedBox } from '@react-three/drei';
+import { Text, Float, MeshReflectorMaterial, Sparkles, Ring } from '@react-three/drei';
 import { useCylinder, useBox as useCannonBox } from '@react-three/cannon';
 import * as THREE from 'three';
 
@@ -178,50 +178,6 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
     );
 };
 
-// Impressive decorative environment blocks
-const DecorativeBlocks = () => {
-    const blockPositions = useMemo(() => {
-        const positions = [];
-        // Create impressive block structures around the zone - optimized count
-        for (let i = 0; i < 8; i++) {
-            const angle = (i / 8) * Math.PI * 2;
-            const radius = 25 + Math.random() * 10;
-            const x = Math.cos(angle) * radius;
-            const z = Math.sin(angle) * radius;
-            const height = Math.random() * 8 + 2;
-
-            positions.push({
-                position: [x, height / 2, z],
-                scale: [2 + Math.random() * 2, height, 2 + Math.random() * 2],
-                color: new THREE.Color().setHSL(Math.random(), 0.7, 0.5)
-            });
-        }
-        return positions;
-    }, []);
-
-    return (
-        <group>
-            {blockPositions.map((block, i) => (
-                <RoundedBox
-                    key={i}
-                    position={block.position}
-                    args={block.scale}
-                    radius={0.2}
-                    castShadow
-                    receiveShadow
-                >
-                    <meshStandardMaterial
-                        color={block.color}
-                        metalness={0.6}
-                        roughness={0.3}
-                        emissive={block.color}
-                        emissiveIntensity={0.2}
-                    />
-                </RoundedBox>
-            ))}
-        </group>
-    );
-};
 
 // Main Zone1 Component
 const Zone1_SourceTracking = ({ onComplete }) => {
@@ -331,8 +287,6 @@ const Zone1_SourceTracking = ({ onComplete }) => {
                 />
             ))}
 
-            {/* Impressive decorative environment blocks */}
-            <DecorativeBlocks />
 
             {/* Optimized reflective floor */}
             <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.8, -50]} receiveShadow>
