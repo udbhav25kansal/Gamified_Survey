@@ -34,7 +34,7 @@ const CameraRig = ({ target }) => {
 
 const Vehicle = ({ position = [0, 1, 0] }) => {
     const controls = useControls();
-    
+
     // Smooth steering angle (not instant)
     const steeringAngle = useRef(0);
     const targetSteering = useRef(0);
@@ -69,7 +69,7 @@ const Vehicle = ({ position = [0, 1, 0] }) => {
         if (!chassisApi) return;
 
         const { forward, backward, left, right, brake, reset } = controls.current;
-        
+
         // === TUNING PARAMETERS ===
         const maxSpeed = 25;
         const maxReverse = 15;
@@ -121,7 +121,7 @@ const Vehicle = ({ position = [0, 1, 0] }) => {
         
         // Smooth steering interpolation
         steeringAngle.current += (targetSteering.current - steeringAngle.current) * steerSpeed * delta * 10;
-        
+
         // === TURNING ===
         // Turn rate scales with speed (faster = tighter turns possible)
         const speedFactor = Math.abs(carSpeed.current) / maxSpeed;
