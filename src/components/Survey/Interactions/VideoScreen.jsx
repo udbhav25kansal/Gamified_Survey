@@ -129,21 +129,6 @@ const VideoScreen = ({ position, videoUrl = null, onVideoEnd, isPlaying }) => {
                 color="#E6007E"
             />
 
-            {/* Floating "DECA GAMES" text above screen when not playing */}
-            {!isPlaying && (
-                <group position={[0, 3, 0]}>
-                    <mesh>
-                        <boxGeometry args={[4, 0.6, 0.1]} />
-                        <meshStandardMaterial
-                            color="#E6007E"
-                            emissive="#E6007E"
-                            emissiveIntensity={1.5}
-                            metalness={0.8}
-                            roughness={0.2}
-                        />
-                    </mesh>
-                </group>
-            )}
 
             {/* Particles floating around screen */}
             {!isPlaying && (
