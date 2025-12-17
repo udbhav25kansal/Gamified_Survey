@@ -142,67 +142,6 @@ const Portal = ({ position, icon, label, color, theme, onSelect, selected }) => 
                     color={color}
                 />
 
-                {/* Theme-specific decorations */}
-                {theme === 'social' && (
-                    <group position={[0, 0, -0.5]}>
-                        <RoundedBox args={[0.8, 0.8, 0.2]} radius={0.1} castShadow>
-                            <meshStandardMaterial color="#1DA1F2" metalness={0.8} roughness={0.2} />
-                        </RoundedBox>
-                    </group>
-                )}
-
-                {theme === 'qrcode' && (
-                    <group position={[0, 0, -0.5]}>
-                        <Box args={[1, 1, 1]} castShadow>
-                            <meshStandardMaterial
-                                color="#8B4513"
-                                roughness={0.9}
-                                metalness={0.1}
-                                map={null} // TODO: Add cardboard texture
-                            />
-                        </Box>
-                    </group>
-                )}
-
-                {theme === 'convention' && (
-                    <group position={[0, 0, -0.5]}>
-                        <mesh castShadow>
-                            <coneGeometry args={[1, 1.5, 4]} />
-                            <meshStandardMaterial
-                                color="#FF6B6B"
-                                roughness={0.6}
-                                metalness={0.3}
-                            />
-                        </mesh>
-                    </group>
-                )}
-
-                {theme === 'friend' && (
-                    <group position={[0, 0, -0.5]}>
-                        <mesh castShadow>
-                            <torusKnotGeometry args={[0.4, 0.15, 100, 16]} />
-                            <meshStandardMaterial
-                                color="#FFD700"
-                                metalness={1.0}
-                                roughness={0.1}
-                            />
-                        </mesh>
-                    </group>
-                )}
-
-                {theme === 'unknown' && (
-                    <group position={[0, 0, -0.5]}>
-                        <Sphere args={[0.5, 32, 32]} castShadow>
-                            <meshPhysicalMaterial
-                                color="#9B59B6"
-                                metalness={0.5}
-                                roughness={0.2}
-                                clearcoat={1.0}
-                                clearcoatRoughness={0.1}
-                            />
-                        </Sphere>
-                    </group>
-                )}
             </group>
 
 
