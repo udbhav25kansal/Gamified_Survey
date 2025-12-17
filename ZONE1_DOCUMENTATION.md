@@ -10,7 +10,9 @@
 
 Zone 1 is the **Source Tracking** zone where users answer "How'd you find us?" by driving through one of 5 themed portals. This zone features ultra-high quality graphics, advanced physics, impressive environmental blocks, and stunning visual effects inspired by Bruno Simon's portfolio.
 
-**Updated:** December 17, 2025 - Enhanced visibility and premium text styling with color-matched glows and improved spatial layout.
+**Updated:** December 17, 2025
+- Enhanced visibility and premium text styling with improved spatial layout
+- **Performance optimizations:** 72% particle reduction, optimized shadows and reflections for 60 FPS target
 
 ---
 
@@ -42,9 +44,8 @@ Zone 1 is the **Source Tracking** zone where users answer "How'd you find us?" b
    - Large zone title (1.5 fontSize) with pink outline (#E6007E)
    - Cyan instruction subtitle (0.6 fontSize) for user guidance
    - Enhanced portal labels (0.6 fontSize) with 0.02 letter spacing
-   - Dual-layer text rendering: solid text + glow outline
-   - Dynamic glow intensity on hover (0.3 to 0.6 opacity)
-   - Color-matched outlines per portal theme
+   - Single-layer text with color-matched outlines (optimized for performance)
+   - Clean, readable text rendering
 
 ### ⚙️ Advanced Physics
 
@@ -62,8 +63,8 @@ Zone 1 is the **Source Tracking** zone where users answer "How'd you find us?" b
 
 ### 🏗️ Impressive Environmental Blocks
 
-1. **Procedurally Generated Architecture:**
-   - 20 decorative blocks randomly positioned in a circle
+1. **Procedurally Generated Architecture (Performance Optimized):**
+   - 8 decorative blocks strategically positioned in a circle
    - Variable heights (2-10 units) for visual interest
    - Randomized scales (2-4 units width/depth)
    - HSL color variation for unified palette
@@ -220,9 +221,18 @@ import * as THREE from 'three';
 
 1. **Optimizations Applied:**
    - useMemo for block positions (prevents recalculation)
-   - Efficient particle counts (30 per portal, 100 ambient)
-   - Optimized shadow map sizes (2048x2048)
-   - LOD-ready structure (can be enhanced further)
+   - **Particle counts optimized for 60 FPS:**
+     - Portal sparkles: 8 per portal (40 total)
+     - Atmospheric sparkles: 30
+     - **Total: 70 particles** (down from 250)
+   - **Shadow optimization:**
+     - Main shadow map: 1024×1024 (optimized from 2048)
+     - Spotlights: No shadow casting (major GPU savings)
+   - **Reflective floor:**
+     - Resolution: 512 (optimized from 1024)
+     - MixStrength: 20 (reduced GPU processing)
+   - **Text rendering:** Single-layer (optimized from dual-layer)
+   - **Decorative blocks:** 8 blocks (reduced from 20)
 
 2. **Memory Management:**
    - Reuses geometries where possible
