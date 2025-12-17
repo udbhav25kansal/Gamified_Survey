@@ -79,7 +79,7 @@ const ZoneManager = () => {
             {/* ZONE 0: Welcome & Intro with Deca Bot */}
             <Zone0_Intro
                 onComplete={handleZone0Complete}
-                videoUrl="/videos/deca-intro.mp4"
+                videoUrl={`${import.meta.env.BASE_URL}videos/deca-intro.mp4`}
             />
 
             {/* ZONE 1: Source Tracking - How'd you find us? */}
