@@ -13,6 +13,7 @@ const VideoScreen = ({ position, videoUrl = null, onVideoEnd, isPlaying }) => {
             video.crossOrigin = 'anonymous';
             video.loop = false;
             video.muted = false;
+            video.volume = 1.0; // Set volume to maximum
             video.playsInline = true;
 
             videoRef.current = video;
@@ -40,8 +41,27 @@ const VideoScreen = ({ position, videoUrl = null, onVideoEnd, isPlaying }) => {
     useEffect(() => {
         if (videoRef.current && isPlaying) {
             console.log('Starting video playback...');
+            console.log('Video muted:', videoRef.current.muted);
+            console.log('Video volume:', videoRef.current.volume);
+
+            // Ensure audio is enabled before playing
+            videoRef.current.muted = false;
+            videoRef.current.volume = 1.0;
+
             videoRef.current.play().catch(err => {
                 console.error('Error playing video:', err);
+                // If autoplay fails, try with muted first then unmute
+                if (err.name === 'NotAllowedError') {
+                    console.log('Trying muted playback first...');
+                    videoRef.current.muted = true;
+                    videoRef.current.play().then(() => {
+                        // Unmute after playback starts
+                        setTimeout(() => {
+                            videoRef.current.muted = false;
+                            console.log('Video unmuted after playback started');
+                        }, 100);
+                    });
+                }
             });
         } else if (videoRef.current && !isPlaying) {
             videoRef.current.pause();
